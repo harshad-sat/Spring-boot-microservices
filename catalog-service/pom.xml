@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
+		<dockerImageName>harshadyeolekar/bookstore-${project.artifactId}</dockerImageName>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -113,6 +114,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>${dockerImageName}</name>
+						<!--below is configuration just for mac-->
+						<builder>dashaun/builder:tiny</builder>
+					</image>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
