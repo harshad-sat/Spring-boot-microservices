@@ -2,7 +2,7 @@ package hy.example.catalogservice.hy.example.domain;
 
 class ProductMapper {
 
-    static Product toEntity(ProductEntity productEntity) {
+    static Product toProduct(ProductEntity productEntity) {
         return new Product(
                 productEntity.getCode(),
                 productEntity.getName(),
