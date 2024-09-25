@@ -1,6 +1,6 @@
 package hy.example.catalogservice.hy.example.domain;
 
- class ProductMapper {
+class ProductMapper {
 
     static Product toEntity(ProductEntity productEntity) {
         return new Product(

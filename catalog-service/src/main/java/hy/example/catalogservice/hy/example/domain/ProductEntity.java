@@ -1,17 +1,14 @@
 package hy.example.catalogservice.hy.example.domain;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Enabled;
-
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
- class ProductEntity {
+class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
