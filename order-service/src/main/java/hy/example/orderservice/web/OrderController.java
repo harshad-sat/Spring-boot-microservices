@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/orders")
-//@SecurityRequirement(name = "security_auth")
+// @SecurityRequirement(name = "security_auth")
 public class OrderController {
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 

@@ -1,6 +1,5 @@
 package hy.example.orderservice;
 
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "orders")
@@ -10,5 +9,4 @@ public record ApplicationProperties(
         String newOrdersQueue,
         String deliveredOrdersQueue,
         String canceledOrdersQueue,
-        String errorOrdersQueue) {
-}
+        String errorOrdersQueue) {}

@@ -17,19 +17,19 @@ class RabbitMQConfig {
         this.properties = properties;
     }
 
-    //defining exchange
+    // defining exchange
     @Bean
     DirectExchange exchange() {
         return new DirectExchange(properties.orderEventExchange());
     }
 
-    //defining queue
+    // defining queue
     @Bean
     Queue newOrdersQueue() {
         return QueueBuilder.durable(properties.newOrdersQueue()).build();
     }
 
-    //binding with routing key- keeping same name as queue but can be different
+    // binding with routing key- keeping same name as queue but can be different
     @Bean
     Binding newOrdersQueueBinding() {
         return BindingBuilder.bind(newOrdersQueue()).to(exchange()).with(properties.newOrdersQueue());

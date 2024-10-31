@@ -1,4 +1,3 @@
 package hy.example.orderservice.domain.model;
 
-public class OrderEventMapper {
-}
+public class OrderEventMapper {}

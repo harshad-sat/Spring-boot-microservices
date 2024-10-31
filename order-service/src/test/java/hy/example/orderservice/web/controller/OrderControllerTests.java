@@ -1,22 +1,18 @@
 package hy.example.orderservice.web.controller;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
-import hy.example.orderservice.AbstractIT;
-import hy.example.orderservice.testData.TestDataFactory;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
-
-import java.math.BigDecimal;
-
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
-//@Sql("/test-orders.sql")
+import hy.example.orderservice.AbstractIT;
+import hy.example.orderservice.testData.TestDataFactory;
+import io.restassured.http.ContentType;
+import java.math.BigDecimal;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+
+// @Sql("/test-orders.sql")
 class OrderControllerTests extends AbstractIT {
 
     @Nested
@@ -51,7 +47,7 @@ class OrderControllerTests extends AbstractIT {
                         }
                     """;
             given().contentType(ContentType.JSON)
-                    //.header("Authorization", "Bearer " + getToken())
+                    // .header("Authorization", "Bearer " + getToken())
                     .body(payload)
                     .when()
                     .post("/api/orders")
@@ -64,7 +60,7 @@ class OrderControllerTests extends AbstractIT {
         void shouldReturnBadRequestWhenMandatoryDataIsMissing() {
             var payload = TestDataFactory.createOrderRequestWithInvalidCustomer();
             given().contentType(ContentType.JSON)
-                    //.header("Authorization", "Bearer " + getToken())
+                    // .header("Authorization", "Bearer " + getToken())
                     .body(payload)
                     .when()
                     .post("/api/orders")
@@ -73,7 +69,7 @@ class OrderControllerTests extends AbstractIT {
         }
     }
 
-   /* @Nested
+    /* @Nested
     class GetOrdersTests {
         @Test
         void shouldGetOrdersSuccessfully() {
@@ -105,6 +101,5 @@ class OrderControllerTests extends AbstractIT {
                     .body("items.size()", is(2));
         }
     }*/
-
 
 }

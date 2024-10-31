@@ -1,17 +1,15 @@
 package hy.example.orderservice.testData;
 
-import hy.example.orderservice.domain.model.CreateOrderRequest;
-import hy.example.orderservice.domain.model.OrderItem;
-import hy.example.orderservice.domain.model.Customer;
-import hy.example.orderservice.domain.model.Address;
-import org.instancio.Instancio;
+import static org.instancio.Select.field;
 
+import hy.example.orderservice.domain.model.Address;
+import hy.example.orderservice.domain.model.CreateOrderRequest;
+import hy.example.orderservice.domain.model.Customer;
+import hy.example.orderservice.domain.model.OrderItem;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
-
-import static org.instancio.Select.field;
-
+import org.instancio.Instancio;
 
 public class TestDataFactory {
     static final List<String> VALID_COUNTIES = List.of("India", "Germany");
@@ -52,5 +50,4 @@ public class TestDataFactory {
                 .set(field(CreateOrderRequest::items), Set.of())
                 .create();
     }
-
 }

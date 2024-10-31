@@ -4,11 +4,10 @@ import hy.example.orderservice.clients.config.Product;
 import hy.example.orderservice.clients.config.ProductServiceClient;
 import hy.example.orderservice.domain.model.CreateOrderRequest;
 import hy.example.orderservice.domain.model.OrderItem;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
 
 @Component
 class OrderValidator {

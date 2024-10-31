@@ -2,14 +2,11 @@ package hy.example.orderservice.domain;
 
 import hy.example.orderservice.domain.model.CreateOrderRequest;
 import hy.example.orderservice.domain.model.CreateOrderResponse;
-//import hy.example.orderservice.domain.model.OrderCreatedEvent;
-import hy.example.orderservice.domain.model.OrderDTO;
-import hy.example.orderservice.domain.model.OrderEventMapper;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 @Transactional
@@ -19,12 +16,12 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderValidator orderValidator;
-    //private final OrderEventService orderEventService;
+    // private final OrderEventService orderEventService;
 
     OrderService(OrderRepository orderRepository, OrderValidator orderValidator) {
         this.orderRepository = orderRepository;
         this.orderValidator = orderValidator;
-        //this.orderEventService = orderEventService;
+        // this.orderEventService = orderEventService;
     }
 
     public CreateOrderResponse createOrder(String userName, CreateOrderRequest request) {
@@ -33,12 +30,12 @@ public class OrderService {
         newOrder.setUserName(userName);
         OrderEntity savedOrder = this.orderRepository.save(newOrder);
         log.info("Created Order with orderNumber={}", savedOrder.getOrderNumber());
-        //OrderCreatedEvent orderCreatedEvent = OrderEventMapper.buildOrderCreatedEvent(savedOrder);
-        //orderEventService.save(orderCreatedEvent);
+        // OrderCreatedEvent orderCreatedEvent = OrderEventMapper.buildOrderCreatedEvent(savedOrder);
+        // orderEventService.save(orderCreatedEvent);
         return new CreateOrderResponse(savedOrder.getOrderNumber());
     }
 
-   /* public List<OrderSummary> findOrders(String userName) {
+    /* public List<OrderSummary> findOrders(String userName) {
         return orderRepository.findByUserName(userName);
     }
 
