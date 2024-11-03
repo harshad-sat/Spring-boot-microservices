@@ -2,17 +2,23 @@ package hy.example.orderservice.web.controller;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.core.Is.is;
 
 import hy.example.orderservice.AbstractIT;
+import hy.example.orderservice.domain.model.OrderSummary;
 import hy.example.orderservice.testData.TestDataFactory;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import java.math.BigDecimal;
+import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.jdbc.Sql;
 
-// @Sql("/test-orders.sql")
+@Sql("/test-orders.sql")
 class OrderControllerTests extends AbstractIT {
 
     @Nested
@@ -69,12 +75,12 @@ class OrderControllerTests extends AbstractIT {
         }
     }
 
-    /* @Nested
+    @Nested
     class GetOrdersTests {
         @Test
         void shouldGetOrdersSuccessfully() {
             List<OrderSummary> orderSummaries = given().when()
-                    .header("Authorization", "Bearer " + getToken())
+                    // .header("Authorization", "Bearer " + getToken())
                     .get("/api/orders")
                     .then()
                     .statusCode(200)
@@ -93,13 +99,12 @@ class OrderControllerTests extends AbstractIT {
         @Test
         void shouldGetOrderSuccessfully() {
             given().when()
-                    .header("Authorization", "Bearer " + getToken())
+                    // .header("Authorization", "Bearer " + getToken())
                     .get("/api/orders/{orderNumber}", orderNumber)
                     .then()
                     .statusCode(200)
                     .body("orderNumber", is(orderNumber))
                     .body("items.size()", is(2));
         }
-    }*/
-
+    }
 }

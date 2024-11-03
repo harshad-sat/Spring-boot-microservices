@@ -1,9 +1,9 @@
 package hy.example.orderservice.domain;
 
-import hy.example.orderservice.domain.model.CreateOrderRequest;
-import hy.example.orderservice.domain.model.CreateOrderResponse;
+import hy.example.orderservice.domain.model.*;
 import jakarta.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderValidator orderValidator;
-    // private final OrderEventService orderEventService;
+    private final OrderEventService orderEventService;
 
-    OrderService(OrderRepository orderRepository, OrderValidator orderValidator) {
+    OrderService(OrderRepository orderRepository, OrderValidator orderValidator, OrderEventService orderEventService) {
         this.orderRepository = orderRepository;
         this.orderValidator = orderValidator;
-        // this.orderEventService = orderEventService;
+        this.orderEventService = orderEventService;
     }
 
     public CreateOrderResponse createOrder(String userName, CreateOrderRequest request) {
@@ -30,12 +30,12 @@ public class OrderService {
         newOrder.setUserName(userName);
         OrderEntity savedOrder = this.orderRepository.save(newOrder);
         log.info("Created Order with orderNumber={}", savedOrder.getOrderNumber());
-        // OrderCreatedEvent orderCreatedEvent = OrderEventMapper.buildOrderCreatedEvent(savedOrder);
-        // orderEventService.save(orderCreatedEvent);
+        OrderCreatedEvent orderCreatedEvent = OrderEventMapper.buildOrderCreatedEvent(savedOrder);
+        orderEventService.save(orderCreatedEvent);
         return new CreateOrderResponse(savedOrder.getOrderNumber());
     }
 
-    /* public List<OrderSummary> findOrders(String userName) {
+    public List<OrderSummary> findOrders(String userName) {
         return orderRepository.findByUserName(userName);
     }
 
@@ -76,5 +76,5 @@ public class OrderService {
     private boolean canBeDelivered(OrderEntity order) {
         return DELIVERY_ALLOWED_COUNTRIES.contains(
                 order.getDeliveryAddress().country().toUpperCase());
-    }*/
+    }
 }
